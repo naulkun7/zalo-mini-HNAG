@@ -6,6 +6,7 @@ import "../css/index.css";
 import UserCard from "../components/user-card";
 
 const HomePage = () => {
+  const navigate = useNavigate();
   const [meal, setMeal] = useState(null);
 
   const fetchMeal = () => {
@@ -34,69 +35,50 @@ const HomePage = () => {
     return (
       <div className="row">
         <div className="columns five">
-          <img src={meal.strMealThumb} alt="Meal" />
-          {meal.strCategory && (
-            <p>
-              <strong>Category:</strong> {meal.strCategory}
-            </p>
-          )}
-          {meal.strArea && (
-            <p>
-              <strong>Area:</strong> {meal.strArea}
-            </p>
-          )}
-          {meal.strTags && (
-            <p>
-              <strong>Tags:</strong> {meal.strTags.split(",").join(", ")}
-            </p>
-          )}
-          <h5>Ingredients:</h5>
-          <ul>
-            {ingredients.map((ingredient, index) => (
-              <li key={index}>{ingredient}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="columns seven">
-          <h4>{meal.strMeal}</h4>
-          <p>{meal.strInstructions}</p>
-        </div>
-        {meal.strYoutube && (
-          <div className="row">
-            <h5>Video Recipe</h5>
-            <div className="videoWrapper">
-              <iframe
-                width="420"
-                height="315"
-                src={`https://www.youtube.com/embed/${meal.strYoutube.slice(
-                  -11
-                )}`}
-                title="Meal Video"
-              />
-            </div>
+          <img className="rounded-full" src={meal.strMealThumb} alt="Meal" />
+          <div className="py-5">
+            {meal.strCategory && (
+              <p className="text-center">
+                <strong>Tên quán: </strong> {meal.strCategory}
+              </p>
+            )}
+            {meal.strArea && (
+              <p className="text-center">
+                <strong>Địa chỉ: </strong> {meal.strArea}
+              </p>
+            )}
           </div>
-        )}
+          <div className="text-center">
+            <button
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full text-center"
+              onClick={() => navigate("/user")}
+            >
+              Tìm hiểu thêm!
+            </button>
+          </div>
+        </div>
       </div>
     );
   };
 
   return (
-    <div className="container">
-      <div
-        className="foodLogo"
-        style={{ backgroundImage: "url('food.jpg')" }}
-      ></div>
-      <div className="indexText">
-        <h1>Feeling hungry?</h1>
-        <h2>Get a random meal by clicking below</h2>
+    <Page className="page container">
+      <div className="indexText ">
+        <h1 className="text-center py-2">Em ơi em em có đang đói hong? </h1>
+        <h2 className="text-center py-2">Nếu em đói thì em ăn anh đi!!!</h2>
       </div>
-      <div className="indexButton">
-        <button onClick={fetchMeal}>Get a meal</button>
+      <div className="indexButton text-center py-5">
+        <button
+          className="bg-violet-500 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded-full"
+          onClick={fetchMeal}
+        >
+          Get a meal
+        </button>
       </div>
       <div id="mealContainer" className="mealContainer">
         {renderMeal()}
       </div>
-    </div>
+    </Page>
   );
 
   // const user = useRecoilValue(userState);
