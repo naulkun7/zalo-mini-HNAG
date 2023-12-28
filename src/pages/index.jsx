@@ -30,12 +30,15 @@ const HomePage = () => {
     "Bún Bò Huế Vĩ Dạ làng đại học",
     "Trà sữa Ngô Gia làng đại học",
     "Trà sữa AZ làng đại học",
+    "Cafe muối chú long làng đại học",
+    "Bún chả hà nội làng đại học",
+    "Lẩu chay Hoàng Đạt 2 làng đại học",
   ]; // array of place names
 
   const fetchRandomMeal = () => {
     // Randomly select a new query from the array
     const randomQuery =
-      placeNames[Math.floor(Math.random() * placeNames.length)];
+      placeNames[Math.floor(Math.random(9) * placeNames.length)];
     setQuery(randomQuery);
   };
   const fetchMeal = () => {
