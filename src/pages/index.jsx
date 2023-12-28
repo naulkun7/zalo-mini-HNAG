@@ -28,6 +28,8 @@ const HomePage = () => {
     "cơm xèo khu B làng đại học",
     "Bún Bò Huế Sông Hương làng đại học",
     "Bún Bò Huế Vĩ Dạ làng đại học",
+    "Trà sữa Ngô Gia làng đại học",
+    "Trà sữa AZ làng đại học",
   ]; // array of place names
 
   const fetchRandomMeal = () => {
@@ -41,7 +43,7 @@ const HomePage = () => {
   };
 
   const renderMeal = () => {
-    if (!place) return null;
+    if (!place || !place.photos || place.photos.length === 0) return null;
 
     return (
       <div className="row">
