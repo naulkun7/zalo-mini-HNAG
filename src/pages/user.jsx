@@ -1,14 +1,28 @@
 import React from "react";
-import { Avatar, List, Text, Box, Page, Button, Icon, useNavigate } from "zmp-ui";
+import {
+  Avatar,
+  List,
+  Text,
+  Box,
+  Page,
+  Button,
+  Icon,
+  useNavigate,
+} from "zmp-ui";
 import { useRecoilValue } from "recoil";
 import { userState } from "../state";
 
 const UserPage = () => {
   const user = useRecoilValue(userState);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <Page className="page">
-      <Box flex flexDirection="column" justifyContent="center" alignItems="center">
+      <Box
+        flex
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Box>
           <Avatar
             story
@@ -21,10 +35,16 @@ const UserPage = () => {
         </Box>
         <Box flex flexDirection="row" alignItems="center" ml={8}>
           <Box>
-          <Text.Title >{user.name}</Text.Title>
+            <Text.Title>{user.name}</Text.Title>
           </Box>
           <Box ml={4}>
-            <Button onClick={()=>{navigate('/form')}}  size='small' icon={<Icon icon="zi-edit"/>}/>
+            <Button
+              onClick={() => {
+                navigate("/form");
+              }}
+              size="small"
+              icon={<Icon icon="zi-edit" />}
+            />
           </Box>
         </Box>
       </Box>
@@ -36,7 +56,6 @@ const UserPage = () => {
           </List>
         </div>
       </Box>
-
     </Page>
   );
 };
