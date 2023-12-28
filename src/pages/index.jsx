@@ -1,56 +1,53 @@
 import React, { useState, useEffect } from "react";
-import { List, Page, Icon, useNavigate } from "zmp-ui";
-import { useRecoilValue } from "recoil";
-import { userState } from "../state";
+import { Page, useNavigate } from "zmp-ui";
+import useGooglePlacesAPI from "../components/useGoogleAPI";
 import "../css/index.css";
-import UserCard from "../components/user-card";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [meal, setMeal] = useState(null);
+  const [place, setMealState] = useState(null);
+  const { fetchPlaceDetails, loading } = useGooglePlacesAPI(
+    "hoàng thị coffee nguyễn thái bình"
+  );
+
+  useEffect(() => {
+    if (!loading) {
+      fetchPlaceDetails()
+        .then((place) => {
+          setMealState(place);
+          console.log(place);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [loading, fetchPlaceDetails]);
 
   const fetchMeal = () => {
-    fetch("https://www.themealdb.com/api/json/v1/1/random.php")
-      .then((response) => response.json())
-      .then((data) => {
-        setMeal(data.meals[0]);
-      })
-      .catch((error) => console.error("Error:", error));
+    fetchPlaceDetails();
   };
 
   const renderMeal = () => {
-    if (!meal) return null;
-
-    const ingredients = [];
-    for (let i = 1; i <= 20; i++) {
-      if (meal[`strIngredient${i}`]) {
-        ingredients.push(
-          `${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`,
-        );
-      } else {
-        break;
-      }
-    }
+    if (!place) return null;
 
     return (
       <div className="row">
         <div className="columns five">
-          <img className="rounded-full" src={meal.strMealThumb} alt="Meal" />
+          <img
+            className="rounded-full"
+            src={place.photos[0].getUrl()}
+            alt="Meal"
+          />
           <div className="py-5">
-            {meal.strCategory && (
+            {place.name && (
               <p className="text-center">
-                <strong>Tên quán: </strong> {meal.strCategory}
-              </p>
-            )}
-            {meal.strArea && (
-              <p className="text-center">
-                <strong>Địa chỉ: </strong> {meal.strArea}
+                <strong>Tên quán: </strong> {place.name}
               </p>
             )}
           </div>
           <div className="text-center">
             <button
-              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full text-center"
+              className="bg-green-500 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded-full"
               onClick={() => navigate("/user")}
             >
               Tìm hiểu thêm!
@@ -80,26 +77,6 @@ const HomePage = () => {
       </div>
     </Page>
   );
-
-  // const user = useRecoilValue(userState);
-  // const navigate = useNavigate();
-  // return (
-  //   <Page className="page">
-  //     <div className="section-container">
-  //       <UserCard user={user} />
-  //     </div>
-  //     <div className="section-container">
-  //       <List>
-  //         <List.Item suffix={<Icon icon="zi-arrow-right" />}>
-  //           <div onClick={() => navigate("/about")}>About</div>
-  //         </List.Item>
-  //         <List.Item suffix={<Icon icon="zi-arrow-right" />}>
-  //           <div onClick={() => navigate("/user")}>User</div>
-  //         </List.Item>
-  //       </List>
-  //     </div>
-  //   </Page>
-  // );
 };
 
 export default HomePage;
