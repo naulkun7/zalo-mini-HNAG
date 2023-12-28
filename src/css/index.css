@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mealContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 10px;
+}
+
+.indexText {
+  font-size: large;
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+
+.indexButton button {
+  padding: 14px 21px;
+  text-transform: uppercase;
+  font-size: 17px;
+  border-radius: 10px;
+  border-color: transparent;
+  background: rgb(247, 183, 65);
+  box-shadow: 2px 2px 1px #888888;
+  margin-bottom: 20px;
+}
+
+.foodLogo {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 20%;
+  padding-bottom: 20%;
+  border-radius: 300px;
+}
