@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from "react";
-import { List, Page, Icon, useNavigate } from "zmp-ui";
-import { useRecoilValue } from "recoil";
-import { userState } from "../state";
-import "../css/index.css";
-import UserCard from "../components/user-card";
+import React, { useState, useEffect } from "react"
+import { List, Page, Icon, useNavigate } from "zmp-ui"
+import { useRecoilValue } from "recoil"
+import { userState } from "../state"
+import "../css/index.css"
+import UserCard from "../components/user-card"
 
 const HomePage = () => {
-  const [meal, setMeal] = useState(null);
+  const [meal, setMeal] = useState(null)
 
   const fetchMeal = () => {
     fetch("https://www.themealdb.com/api/json/v1/1/random.php")
       .then((response) => response.json())
       .then((data) => {
-        setMeal(data.meals[0]);
+        setMeal(data.meals[0])
       })
-      .catch((error) => console.error("Error:", error));
-  };
+      .catch((error) => console.error("Error:", error))
+  }
 
   const renderMeal = () => {
-    if (!meal) return null;
+    if (!meal) return null
 
-    const ingredients = [];
+    const ingredients = []
     for (let i = 1; i <= 20; i++) {
       if (meal[`strIngredient${i}`]) {
         ingredients.push(
           `${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`
-        );
+        )
       } else {
-        break;
+        break
       }
     }
 
@@ -77,8 +77,8 @@ const HomePage = () => {
           </div>
         )}
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <div className="container">
@@ -97,7 +97,7 @@ const HomePage = () => {
         {renderMeal()}
       </div>
     </div>
-  );
+  )
 
   // const user = useRecoilValue(userState);
   // const navigate = useNavigate();
@@ -118,6 +118,6 @@ const HomePage = () => {
   //     </div>
   //   </Page>
   // );
-};
+}
 
-export default HomePage;
+export default HomePage
