@@ -31,6 +31,8 @@ const HomePage = () => {
     "Cafe muối chú long làng đại học", //ok
     "Bún chả hà nội làng đại học", //ok
     "Lẩu chay Hoàng Đạt 2 làng đại học", //ok
+    "Đại học UEF Điện Biên Phủ Quận 3",
+    "cư xá thanh đa, quận bình thạnh",
   ]; // array of place names
 
   const fetchRandomMeal = () => {
