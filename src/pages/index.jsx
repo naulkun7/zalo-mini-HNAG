@@ -5,7 +5,7 @@ import "../css/index.css";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [place, setMealState] = useState(null);
+  const [place, setPlace] = useState(null);
   const [query, setQuery] = useState("cơm tấm long xuyên làng đại học"); // default query
   const { fetchPlaceDetails, loading } = useGooglePlacesAPI(query);
 
@@ -13,7 +13,7 @@ const HomePage = () => {
     if (!loading) {
       fetchPlaceDetails()
         .then((place) => {
-          setMealState(place);
+          setPlace(place);
           console.log(place);
         })
         .catch((error) => {
@@ -23,22 +23,20 @@ const HomePage = () => {
   }, [loading, fetchPlaceDetails]);
 
   const placeNames = [
-    "cơm tấm long xuyên làng đại học",
-    "cơm tấm ngô quyền",
-    "cơm xèo khu B làng đại học",
+    "cơm tấm long xuyên làng đại học", //ok
+    "cơm tấm ngô quyền", //ok
+    "cơm xèo khu B làng đại học", //ok
     "Bún Bò Huế Sông Hương làng đại học",
-    "Bún Bò Huế Vĩ Dạ làng đại học",
-    "Trà sữa Ngô Gia làng đại học",
-    "Trà sữa AZ làng đại học",
-    "Cafe muối chú long làng đại học",
-    "Bún chả hà nội làng đại học",
-    "Lẩu chay Hoàng Đạt 2 làng đại học",
+    "Trà sữa Ngô Gia làng đại học", //ok
+    "Cafe muối chú long làng đại học", //ok
+    "Bún chả hà nội làng đại học", //ok
+    "Lẩu chay Hoàng Đạt 2 làng đại học", //ok
   ]; // array of place names
 
   const fetchRandomMeal = () => {
     // Randomly select a new query from the array
     const randomQuery =
-      placeNames[Math.floor(Math.random(9) * placeNames.length)];
+      placeNames[Math.floor(Math.random(7) * placeNames.length)];
     setQuery(randomQuery);
   };
   const fetchMeal = () => {
