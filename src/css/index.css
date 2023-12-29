@@ -37,16 +37,18 @@
   border-radius: 300px;
 }
 .fade-in {
-  animation: fadeInAnimation ease 10s;
+  animation: fadeInRotateZoomEffect ease 1.5s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-@keyframes fadeInAnimation {
+@keyframes fadeInRotateZoomEffect {
   0% {
     opacity: 0;
+    transform: scale(0.8) rotate(-30deg);
   }
   100% {
     opacity: 1;
+    transform: scale(1) rotate(0deg);
   }
 }
