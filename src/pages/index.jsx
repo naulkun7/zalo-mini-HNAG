@@ -6,6 +6,7 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [meal, setMealData] = useState(null);
   const [fadeIn, setFadeIn] = useState(true); // Thêm trạng thái cho fade-in
+  const [combinedData, setCombinedData] = useState(null);
 
   // Hàm lấy dữ liệu từ API đầu tiên
   const fetchFirstAPI = () => {
@@ -20,27 +21,53 @@ const HomePage = () => {
       "https://script.googleusercontent.com/macros/echo?user_content_key=FvlCWI1oeONe3BDm68bGe5_6PsyHLslAmSRXwrUbuV7jQLEXxT54MWA-wUJ5hDq8-vHHcVPAQE3BLNQ0utitdiONGMenw1LFm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJpHd3Lj6hYn8QidPbzc6HMqhdHxxMyXojQb4J6TUhoTWJcH0mXWDdmx92XXXhWW2peOT8Sx6aTNu9L8Znz9rZTIHL9JxBcbbg&lib=MilZab3rrtfpA0JGMc26Z3NOiBieB7han"
     ).then((res) => res.json());
   };
-
-  // Hàm kết hợp dữ liệu từ cả hai API
-  const combineData = (data1, data2) => {
-    // Logic để kết hợp dữ liệu (đây chỉ là ví dụ)
-    return { ...data1, additionalData: data2 };
-  };
-
-  // Hàm lấy bữa ăn ngẫu nhiên và kết hợp dữ liệu từ cả hai API
-  const getRandomMeal = () => {
-    Promise.all([fetchFirstAPI(), fetchSecondAPI()])
-      .then(([firstAPIData, secondAPIData]) => {
-        // Kết hợp dữ liệu từ cả hai API
+  // Hàm lấy dữ liệu từ API và lưu vào localStorage
+  const fetchAndSaveData = () => {
+    return Promise.all([fetchFirstAPI(), fetchSecondAPI()]).then(
+      ([firstAPIData, secondAPIData]) => {
         const combinedData = [...firstAPIData, ...secondAPIData];
-        // Chọn ngẫu nhiên một mục từ dữ liệu kết hợp
-        const randomMeal =
-          combinedData[Math.floor(Math.random() * combinedData.length)];
-        setMealData(randomMeal);
-      })
-      .catch((error) => {
-        console.error("Error fetching data: ", error);
-      });
+        localStorage.setItem("mealsData", JSON.stringify(combinedData));
+        return combinedData;
+      }
+    );
+  };
+  // // Hàm kết hợp dữ liệu từ cả hai API
+  // const combineData = (data1, data2) => {
+  //   // Logic để kết hợp dữ liệu (đây chỉ là ví dụ)
+  //   return { ...data1, additionalData: data2 };
+  // };
+  // Sử dụng useEffect để kiểm tra và lấy dữ liệu từ localStorage hoặc gọi API
+  useEffect(() => {
+    const localData = localStorage.getItem("mealsData");
+    if (localData) {
+      setCombinedData(JSON.parse(localData));
+    } else {
+      fetchAndSaveData().then((data) => setCombinedData(data));
+    }
+  }, []);
+
+  // // Hàm lấy bữa ăn ngẫu nhiên và kết hợp dữ liệu từ cả hai API
+  // const getRandomMeal = () => {
+  //   Promise.all([fetchFirstAPI(), fetchSecondAPI()])
+  //     .then(([firstAPIData, secondAPIData]) => {
+  //       // Kết hợp dữ liệu từ cả hai API
+  //       const combinedData = [...firstAPIData, ...secondAPIData];
+  //       // Chọn ngẫu nhiên một mục từ dữ liệu kết hợp
+  //       const randomMeal =
+  //         combinedData[Math.floor(Math.random() * combinedData.length)];
+  //       setMealData(randomMeal);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching data: ", error);
+  //     });
+  // };
+  // Hàm lấy bữa ăn ngẫu nhiên từ dữ liệu đã lưu
+  const getRandomMeal = () => {
+    if (combinedData) {
+      const randomMeal =
+        combinedData[Math.floor(Math.random() * combinedData.length)];
+      setMealData(randomMeal);
+    }
   };
   useEffect(() => {
     if (meal) {
