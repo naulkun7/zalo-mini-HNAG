@@ -1,85 +1,84 @@
 import React, { useState, useEffect } from "react";
 import { Page, useNavigate } from "zmp-ui";
-import useGooglePlacesAPI from "../components/useGoogleAPI";
 import "../css/index.css";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const [place, setPlace] = useState(null);
-  const [query, setQuery] = useState("cơm tấm long xuyên làng đại học"); // default query
-  const { fetchPlaceDetails, loading } = useGooglePlacesAPI(query);
+  const [meal, setMealData] = useState(null);
+  const [fadeIn, setFadeIn] = useState(false);
 
+  const getRandomMeal = () => {
+    fetch("https://sheetdb.io/api/v1/sqgpxr8fa1wme")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.length > 0) {
+          // Randomly select one meal from the data
+          const randomMeal = data[Math.floor(Math.random() * data.length)];
+          setMealData(randomMeal);
+          setFadeIn(false);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  };
   useEffect(() => {
-    if (!loading) {
-      fetchPlaceDetails()
-        .then((place) => {
-          setPlace(place);
-          console.log(place);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    if (meal) {
+      // Trigger fade-in effect
+      setFadeIn(true);
     }
-  }, [loading, fetchPlaceDetails]);
-
-  const placeNames = [
-    "cơm tấm long xuyên làng đại học", //ok
-    "cơm tấm ngô quyền", //ok
-    "cơm xèo khu B làng đại học", //ok
-    "Bún Bò Huế Sông Hương làng đại học",
-    "Trà sữa Ngô Gia làng đại học", //ok
-    "Cafe muối chú long làng đại học", //ok
-    "Bún chả hà nội làng đại học", //ok
-    "Lẩu chay Hoàng Đạt 2 làng đại học", //ok
-    "Đại học UEF Điện Biên Phủ Quận 3",
-    "cư xá thanh đa, quận bình thạnh",
-  ]; // array of place names
-
-  const fetchRandomMeal = () => {
-    // Randomly select a new query from the array
-    const randomQuery =
-      placeNames[Math.floor(Math.random(7) * placeNames.length)];
-    setQuery(randomQuery);
-  };
-  const fetchMeal = () => {
-    fetchPlaceDetails();
-  };
-
+  }, [meal]);
   const renderMeal = () => {
-    if (!place || !place.photos || place.photos.length === 0) return null;
+    if (!meal) return null;
 
     return (
       <div className="row">
-        <div className="columns five">
+        <div className="columns five  ">
           <img
-            className=" w-64 h-64 rounded-full max-w-lg mx-auto"
-            src={place.photos[0].getUrl()}
+            className="w-64 h-64 rounded-full max-w-lg mx-auto "
+            src={meal.image_source} // Use the correct property for the image URL
             alt="Meal"
-            style={{
-              objectFit: "cover",
-            }}
           />
           <div className="py-5">
-            {place.name && (
-              <p className="text-left">
-                <strong>Tên quán: </strong> {place.name}
+            {meal.name && (
+              <p className="text-left py-1">
+                <strong>Name: </strong> {meal.name}
               </p>
             )}
-            {place.rating && (
-              <p className="text-left">
-                <strong>Rating: </strong> {place.rating}
+            {meal.phone_number && (
+              <p className="text-left py-1">
+                <strong>Phone number: </strong> {meal.phone_number}
               </p>
             )}
-            {place.formatted_phone_number && (
-              <p className="text-left">
-                <strong>Phone number: </strong> {place.formatted_phone_number}
+            {meal.address_full && (
+              <p className="text-left py-1">
+                <strong>Address: </strong> {meal.address_full}
+              </p>
+            )}
+            {meal.rating && (
+              <p className="text-left py-1">
+                <strong>Rating: </strong> {meal.rating}
+              </p>
+            )}
+            {meal.place_status && (
+              <p className="text-left py-1">
+                <strong>Status: </strong> {meal.place_status}
               </p>
             )}
           </div>
-          <div className="text-center">
+
+          {/* <div className="text-center py-4">
             <button
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-              onClick={() => (window.location.href = place.url)}
+              className="bg-violet-400 hover:bg-violet-800 text-white font-bold py-2 px-4 rounded-full"
+              onClick={() => navigate("/user")}
+            >
+              MORE INFO
+            </button>
+          </div> */}
+          <div className="text-center py-4">
+            <button
+              className="bg-rose-500 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded-full max-w-xs w-1/2 text-xl"
+              onClick={() => (window.location.href = meal.ggmap_url)}
             >
               GO HERE
             </button>
@@ -90,17 +89,18 @@ const HomePage = () => {
   };
 
   return (
-    <Page className=" ">
-      <div className="bg-pink-100 min-h-screen flex flex-col items-center  p-4 align-top">
-        <button className="bg-pink-300 hover:bg-pink-400 rounded-lg shadow-lg p-5 max-w-xs w-full ">
-          <div
-            className="flex items-center justify-center"
-            onClick={fetchRandomMeal}
-          >
-            RAMDOM HERE
-          </div>
+    <Page>
+      <div className="bg-pink-100 min-h-screen flex flex-col items-center p-4 align-top">
+        <button
+          className="bg-pink-300 hover:bg-pink-400 rounded-lg shadow-lg p-5 max-w-xs w-full font-bold text-xl"
+          onClick={getRandomMeal}
+        >
+          RANDOM MEAL
         </button>
-        <div id="mealContainer" className="mealContainer">
+        <div
+          id="mealContainer"
+          className={`mealContainer ${fadeIn ? "fade-in" : ""}`}
+        >
           {renderMeal()}
         </div>
       </div>

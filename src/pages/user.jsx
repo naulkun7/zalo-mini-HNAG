@@ -18,9 +18,9 @@ const UserPage = () => {
   return (
     <Page className="page">
       <Box
-        flex
         flexDirection="column"
-        justifyContent="center"
+        jusx
+        fletifyContent="center"
         alignItems="center"
       >
         <Box>
