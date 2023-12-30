@@ -1,36 +1,44 @@
-import React, { useState, useEffect } from "react";
-import { Page, useNavigate } from "zmp-ui";
-import "../css/index.css";
+import React, { useState, useEffect } from "react"
+import { Page, useNavigate } from "zmp-ui"
+import "../css/index.css"
+
+// .env API
+const MAP = import.meta.env.VITE_GGMAP_API_URL
+const HAND = import.meta.env.VITE_HAND_API_URL
 
 const HomePage = () => {
-  const navigate = useNavigate();
-  const [meal, setMealData] = useState(null);
-  const [fadeIn, setFadeIn] = useState(true); // Thêm trạng thái cho fade-in
-  const [combinedData, setCombinedData] = useState(null);
+  const navigate = useNavigate()
+  const [meal, setMealData] = useState(null)
+  const [fadeIn, setFadeIn] = useState(true) // Thêm trạng thái cho fade-in
+  const [combinedData, setCombinedData] = useState(null)
 
-  // Hàm lấy dữ liệu từ API đầu tiên
+  // Hàm lấy dữ liệu từ API đầu tiên (GGSheet Hand)
   const fetchFirstAPI = () => {
-    return fetch(
-      "https://script.googleusercontent.com/macros/echo?user_content_key=XBf-c_BwP5Ru5qKESLqFVOY2EQRMUR7Z9AREriOsz1PGbetF452KzpCb30wgp7gCADRGqVbt1YjBLNQ0utitdtWq8pvIoOxtm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnAQGuWArdJsq19KfOQM6PC-CTY22vHubmJXJNSUmg0bTqrDD9oLsQzA5RPLeS3keXEzPShzhs5dvqhj8xEenabWiu5bHNadIKdz9Jw9Md8uu&lib=MCnt7PxykrmY1H76vYkY4oR_poDVca3qB"
-    ).then((res) => res.json());
-  };
+    // return fetch(
+    //   "https://script.googleusercontent.com/macros/echo?user_content_key=XBf-c_BwP5Ru5qKESLqFVOY2EQRMUR7Z9AREriOsz1PGbetF452KzpCb30wgp7gCADRGqVbt1YjBLNQ0utitdtWq8pvIoOxtm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnAQGuWArdJsq19KfOQM6PC-CTY22vHubmJXJNSUmg0bTqrDD9oLsQzA5RPLeS3keXEzPShzhs5dvqhj8xEenabWiu5bHNadIKdz9Jw9Md8uu&lib=MCnt7PxykrmY1H76vYkY4oR_poDVca3qB"
+    // ).then((res) => res.json())
+    return fetch(`${HAND}`).then((res) => res.json())
+  }
 
-  // Hàm lấy dữ liệu từ API thứ hai
+  // Hàm lấy dữ liệu từ API thứ hai (GGSheet Google Map)
   const fetchSecondAPI = () => {
-    return fetch(
-      "https://script.googleusercontent.com/macros/echo?user_content_key=FvlCWI1oeONe3BDm68bGe5_6PsyHLslAmSRXwrUbuV7jQLEXxT54MWA-wUJ5hDq8-vHHcVPAQE3BLNQ0utitdiONGMenw1LFm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJpHd3Lj6hYn8QidPbzc6HMqhdHxxMyXojQb4J6TUhoTWJcH0mXWDdmx92XXXhWW2peOT8Sx6aTNu9L8Znz9rZTIHL9JxBcbbg&lib=MilZab3rrtfpA0JGMc26Z3NOiBieB7han"
-    ).then((res) => res.json());
-  };
+    // return fetch(
+    //   "https://script.googleusercontent.com/macros/echo?user_content_key=FvlCWI1oeONe3BDm68bGe5_6PsyHLslAmSRXwrUbuV7jQLEXxT54MWA-wUJ5hDq8-vHHcVPAQE3BLNQ0utitdiONGMenw1LFm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJpHd3Lj6hYn8QidPbzc6HMqhdHxxMyXojQb4J6TUhoTWJcH0mXWDdmx92XXXhWW2peOT8Sx6aTNu9L8Znz9rZTIHL9JxBcbbg&lib=MilZab3rrtfpA0JGMc26Z3NOiBieB7han"
+    // ).then((res) => res.json())
+    return fetch(`${MAP}`).then((res) => res.json())
+  }
   // Hàm lấy dữ liệu từ API và lưu vào localStorage
   const fetchAndSaveData = () => {
     return Promise.all([fetchFirstAPI(), fetchSecondAPI()]).then(
       ([firstAPIData, secondAPIData]) => {
-        const combinedData = [...firstAPIData, ...secondAPIData];
-        localStorage.setItem("mealsData", JSON.stringify(combinedData));
-        return combinedData;
+        const combinedData = [...firstAPIData, ...secondAPIData]
+        localStorage.setItem("mealsData", JSON.stringify(combinedData))
+        console.log("combinedData", combinedData)
+
+        return combinedData
       }
-    );
-  };
+    )
+  }
   // // Hàm kết hợp dữ liệu từ cả hai API
   // const combineData = (data1, data2) => {
   //   // Logic để kết hợp dữ liệu (đây chỉ là ví dụ)
@@ -38,13 +46,13 @@ const HomePage = () => {
   // };
   // Sử dụng useEffect để kiểm tra và lấy dữ liệu từ localStorage hoặc gọi API
   useEffect(() => {
-    const localData = localStorage.getItem("mealsData");
+    const localData = localStorage.getItem("mealsData")
     if (localData) {
-      setCombinedData(JSON.parse(localData));
+      setCombinedData(JSON.parse(localData))
     } else {
-      fetchAndSaveData().then((data) => setCombinedData(data));
+      fetchAndSaveData().then((data) => setCombinedData(data))
     }
-  }, []);
+  }, [])
 
   // // Hàm lấy bữa ăn ngẫu nhiên và kết hợp dữ liệu từ cả hai API
   // const getRandomMeal = () => {
@@ -65,23 +73,23 @@ const HomePage = () => {
   const getRandomMeal = () => {
     if (combinedData) {
       const randomMeal =
-        combinedData[Math.floor(Math.random() * combinedData.length)];
-      setMealData(randomMeal);
+        combinedData[Math.floor(Math.random() * combinedData.length)]
+      setMealData(randomMeal)
     }
-  };
+  }
   useEffect(() => {
     if (meal) {
-      setFadeIn(false);
-      setTimeout(() => setFadeIn(true), 50);
+      setFadeIn(false)
+      setTimeout(() => setFadeIn(true), 50)
     }
-  }, [meal]); // Theo dõi thay đổi của trạng thái 'meal'
+  }, [meal]) // Theo dõi thay đổi của trạng thái 'meal'
 
   // Hàm render thông tin bữa ăn
   const renderMeal = () => {
-    if (!meal) return null;
+    if (!meal) return null
 
     // Cập nhật class tùy theo trạng thái fade-in
-    const mealClass = fadeIn ? "row fade-in" : "row";
+    const mealClass = fadeIn ? "row fade-in" : "row"
     return (
       <div className={mealClass}>
         <div className="row">
@@ -138,8 +146,8 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <Page>
@@ -155,7 +163,7 @@ const HomePage = () => {
         </div>
       </div>
     </Page>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage
