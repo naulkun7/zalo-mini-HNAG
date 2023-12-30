@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Page, useNavigate } from "zmp-ui"
 import MealRender from "../components/mealRender"
+import MyTinderCard from "../components/tinderCard"
 import "../css/index.css"
 
 // .env API
@@ -44,20 +45,46 @@ const HomePage = () => {
     }
   }, [])
 
-  // Hàm lấy bữa ăn ngẫu nhiên từ dữ liệu đã lưu
+  // // Hàm lấy bữa ăn ngẫu nhiên từ dữ liệu đã lưu
+  // const getRandomMeal = () => {
+  //   if (combinedData) {
+  //     const randomMealIndex = Math.floor(Math.random() * combinedData.length)
+  //     setMealData([combinedData[randomMealIndex]]) // Set as an array
+  //   }
+  // }
+
   const getRandomMeal = () => {
-    if (combinedData) {
-      const randomMeal =
-        combinedData[Math.floor(Math.random() * combinedData.length)]
-      setMealData(randomMeal)
+    if (combinedData && combinedData.length > 0) {
+      let newMealIndex
+      do {
+        newMealIndex = Math.floor(Math.random() * combinedData.length)
+      } while (
+        combinedData[newMealIndex].id === meal?.[0]?.id &&
+        combinedData.length > 1
+      )
+
+      setMealData([combinedData[newMealIndex]])
     }
   }
+
   useEffect(() => {
     if (meal) {
       setFadeIn(false)
       setTimeout(() => setFadeIn(true), 50)
     }
   }, [meal]) // Theo dõi thay đổi của trạng thái 'meal'
+
+  const [lastDirection, setLastDirection] = useState(null) // Added state for last direction
+
+  const swiped = (direction, nameToDelete) => {
+    console.log("removing: " + nameToDelete)
+    setLastDirection(direction) // Use setLastDirection to update the state
+    getRandomMeal()
+  }
+
+  const outOfFrame = (name) => {
+    console.log(name + " left the screen!")
+  }
 
   return (
     <Page>
@@ -68,8 +95,20 @@ const HomePage = () => {
         >
           RANDOM MEAL
         </button>
-        <div id="mealContainer" className="mealContainer ">
-          <MealRender meal={meal} fadeIn={fadeIn} />
+        <div id="mealContainer" className="mealContainer">
+          {meal?.map(
+            (
+              mealItem // Check if meal is not null before mapping
+            ) => (
+              <MyTinderCard
+                key={mealItem.id}
+                onSwipe={(dir) => swiped(dir, mealItem.name)}
+                onCardLeftScreen={() => outOfFrame(mealItem.name)} // Corrected reference to mealItem.name
+              >
+                <MealRender meal={mealItem} />
+              </MyTinderCard>
+            )
+          )}
         </div>
       </div>
     </Page>

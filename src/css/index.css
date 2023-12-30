@@ -36,7 +36,7 @@
   padding-bottom: 20%;
   border-radius: 300px;
 }
-.fade-in {
+/* .fade-in {
   animation: fadeInRotateZoomEffect ease 1.5s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
@@ -51,4 +51,4 @@
     opacity: 1;
     transform: scale(1) rotate(0deg);
   }
-}
+} */

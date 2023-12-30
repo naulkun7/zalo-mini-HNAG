@@ -1,14 +1,14 @@
 import React from "react"
 import TinderCard from "react-tinder-card"
 
-export default function TinderCard() {
+export default function MyTinderCard({ children, onSwipe, onCardLeftScreen }) {
   return (
     <TinderCard
       onSwipe={onSwipe}
-      onCardLeftScreen={() => onCardLeftScreen("fooBar")}
-      preventSwipe={["right", "left"]}
+      onCardLeftScreen={onCardLeftScreen}
+      // preventSwipe={["right", "left"]}
     >
-      Hello, World!
+      {children}
     </TinderCard>
   )
 }
