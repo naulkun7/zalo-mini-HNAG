@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Page, useNavigate } from "zmp-ui"
 import MealRender from "../components/mealRender"
 import MyTinderCard from "../components/tinderCard"
+import MealRenderV2 from "../components/mealRenderV2"
 import "../css/index.css"
 
 // .env API
@@ -9,7 +10,7 @@ const MAP = import.meta.env.VITE_GGMAP_API_URL
 const HAND = import.meta.env.VITE_HAND_API_URL
 
 const HomePage = () => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const [meal, setMealData] = useState(null)
   const [fadeIn, setFadeIn] = useState(true) // Thêm trạng thái cho fade-in
   const [combinedData, setCombinedData] = useState(null)
@@ -96,7 +97,7 @@ const HomePage = () => {
           RANDOM MEAL
         </button>
         <div id="mealContainer" className="mealContainer">
-          {meal?.map(
+          {/* {meal?.map(
             (
               mealItem // Check if meal is not null before mapping
             ) => (
@@ -107,6 +108,13 @@ const HomePage = () => {
               >
                 <MealRender meal={mealItem} />
               </MyTinderCard>
+            )
+          )} */}
+          {meal?.map(
+            (
+              mealItem // Check if meal is not null before mapping
+            ) => (
+              <MealRenderV2 key={mealItem.id} meal={mealItem} fadeIn={fadeIn} />
             )
           )}
         </div>
