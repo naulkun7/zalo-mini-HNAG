@@ -1,5 +1,5 @@
-import React from "react"
-import TinderCard from "react-tinder-card"
+import React from "react";
+import TinderCard from "react-tinder-card";
 
 export default function MyTinderCard({ children, onSwipe, onCardLeftScreen }) {
   return (
@@ -10,5 +10,5 @@ export default function MyTinderCard({ children, onSwipe, onCardLeftScreen }) {
     >
       {children}
     </TinderCard>
-  )
+  );
 }

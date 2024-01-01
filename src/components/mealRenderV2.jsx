@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import {
   FaPhone,
   FaGlobe,
@@ -6,11 +6,11 @@ import {
   FaStar,
   FaClock,
   FaAlignJustify,
-} from "react-icons/fa"
+} from "react-icons/fa";
 
 export default function mealRenderV2({ meal, fadeIn }) {
-  if (!meal) return null
-  const mealClass = fadeIn ? "row fade-in" : "row"
+  if (!meal) return null;
+  const mealClass = fadeIn ? "row fade-in" : "row";
 
   return (
     <div className={mealClass}>
@@ -72,5 +72,5 @@ export default function mealRenderV2({ meal, fadeIn }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
