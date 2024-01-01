@@ -36,7 +36,7 @@ const HomePage = () => {
         console.log("combinedData", combinedData);
 
         return combinedData;
-      }
+      },
     );
   };
   // // Hàm kết hợp dữ liệu từ cả hai API

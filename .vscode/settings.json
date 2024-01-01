@@ -1,0 +1,7 @@
+{
+  "terminal.fontFamily": "MesloLGS NF",
+  "terminal.fontSize": 15,
+  "terminal.fontWeight": "normal",
+  "editor.fontSize": 16,
+  "editor.formatOnPaste": true
+}
