@@ -1,28 +1,22 @@
+// Import libraries
 import React, { useState, useEffect } from "react"
 import { Page } from "zmp-ui"
-import MealRenderV2 from "../components/mealRenderV2"
 import "../css/index.css"
+
+// Import utils
 import { useData } from "../utils/dataContext"
+
+// Import components
+import MealRenderV2 from "../components/mealRenderV2"
+import LoadingScreen from "../components/loadingScreen"
+import RandomMealButton from "../components/btnRandomMeal"
 
 const HomePage = () => {
   const [meal, setMeal] = useState(null)
   const [fadeIn, setFadeIn] = useState(true)
-  const { combinedData } = useData()
+  const { combinedData, isLoading } = useData()
 
-  const getRandomMeal = () => {
-    if (combinedData && combinedData.length > 0) {
-      let newMealIndex
-      do {
-        newMealIndex = Math.floor(Math.random() * combinedData.length)
-      } while (
-        combinedData[newMealIndex].id === meal?.[0]?.id &&
-        combinedData.length > 1
-      )
-
-      setMeal([combinedData[newMealIndex]])
-    }
-  }
-
+  // Animation for when a new meal is rendered
   useEffect(() => {
     if (meal) {
       setFadeIn(false)
@@ -30,25 +24,19 @@ const HomePage = () => {
     }
   }, [meal])
 
-  // const swiped = (direction, nameToDelete) => {
-  //   console.log("removing: " + nameToDelete)
-  //   setLastDirection(direction)
-  //   getRandomMeal()
-  // }
-
-  // const outOfFrame = (name) => {
-  //   console.log(name + " left the screen!")
-  // }
+  // Loading Screen while data is being fetched
+  if (isLoading) {
+    return <LoadingScreen />
+  }
 
   return (
     <Page>
       <div className="bg-pink-100 min-h-screen flex flex-col items-center p-4 align-top">
-        <button
-          className="bg-pink-300 hover:bg-pink-400 rounded-lg shadow-lg p-5 max-w-xs w-full font-bold text-xl"
-          onClick={getRandomMeal}
-        >
-          RANDOM MEAL
-        </button>
+        <RandomMealButton
+          combinedData={combinedData}
+          setMeal={setMeal}
+          currentMealId={meal?.[0]?.id}
+        />
         <div id="mealContainer" className="mealContainer container min-w-full">
           {meal?.map((mealItem) => (
             <MealRenderV2 key={mealItem.id} meal={mealItem} fadeIn={fadeIn} />
