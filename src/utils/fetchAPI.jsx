@@ -2,14 +2,19 @@
 const MAP = import.meta.env.VITE_GGMAP_API_URL
 const HAND = import.meta.env.VITE_HAND_API_URL
 
-// Fetch data from the first API (GGSheet Hand)
-export const fetchFirstAPI = () => {
-  return fetch(`${HAND}`).then((res) => res.json())
+const fetchWithTimeout = (url, timeout = 20000) => {
+  return new Promise((resolve, reject) => {
+    fetch(url).then(resolve, reject)
+    setTimeout(() => reject(new Error("Request timed out")), timeout)
+  })
 }
 
-// Fetch data from the second API (GGSheet Google Map)
+export const fetchFirstAPI = () => {
+  return fetchWithTimeout(`${HAND}`).then((res) => res.json())
+}
+
 export const fetchSecondAPI = () => {
-  return fetch(`${MAP}`).then((res) => res.json())
+  return fetchWithTimeout(`${MAP}`).then((res) => res.json())
 }
 
 // Fetch data from APIs and save to localStorage

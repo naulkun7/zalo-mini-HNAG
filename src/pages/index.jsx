@@ -1,24 +1,13 @@
-// HomePage.jsx
 import React, { useState, useEffect } from "react"
 import { Page } from "zmp-ui"
 import MealRenderV2 from "../components/mealRenderV2"
 import "../css/index.css"
-import { fetchAndSaveData } from "../utils/fetchAPI" // Import functions from fetchAPI.jsx
+import { useData } from "../utils/dataContext"
 
 const HomePage = () => {
   const [meal, setMeal] = useState(null)
   const [fadeIn, setFadeIn] = useState(true)
-  const [combinedData, setCombinedData] = useState(null)
-  // const [lastDirection, setLastDirection] = useState(null)
-
-  useEffect(() => {
-    const localData = localStorage.getItem("mealsData")
-    if (localData) {
-      setCombinedData(JSON.parse(localData))
-    } else {
-      fetchAndSaveData().then((data) => setCombinedData(data))
-    }
-  }, [])
+  const { combinedData } = useData()
 
   const getRandomMeal = () => {
     if (combinedData && combinedData.length > 0) {
@@ -60,7 +49,7 @@ const HomePage = () => {
         >
           RANDOM MEAL
         </button>
-        <div id="mealContainer" className="mealContainer">
+        <div id="mealContainer" className="mealContainer container min-w-full">
           {meal?.map((mealItem) => (
             <MealRenderV2 key={mealItem.id} meal={mealItem} fadeIn={fadeIn} />
           ))}
