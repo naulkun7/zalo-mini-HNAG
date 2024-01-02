@@ -10,17 +10,8 @@ export default function SignIn() {
       password,
     };
 
-    // {
-    //   method: "GET",
-    //   mode: "no-cors",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(userInfoData),
-    // }
-
     const dataUser = fetch(
-      "https://script.googleusercontent.com/macros/echo?user_content_key=TR95pQQJl2jF8s9AtjmNHULbAWjbjIjViJU7rxmkyU9PCf4GQ3zOpAA0xmIcyfwZ8h1225tNc5pq0AnE5kfHY1obi3ESucQ0m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnM5LYq9vae8g0DeUR5443gZplSUshL-U4tZkjWD88PzYAFWIChQt_5-wMIQjIOHxdwvpfgmGYeBTKAE-kmDuFN6klnWEG43rxNz9Jw9Md8uu&lib=Ma6RDRlDqWIa9InNV8sgF6h_poDVca3qB",
+      "https://script.google.com/macros/s/AKfycbx73EsYXkhXVOmXpFRkSHkCcRtOyq1Exdb-UG_rDwm0qYtWV0t1wLzP6Ik7zqyevB1Skg/exec",
       {
         method: "POST",
         mode: "no-cors",
