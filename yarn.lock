@@ -2194,6 +2194,11 @@ react-router@6.21.1:
   dependencies:
     "@remix-run/router" "1.14.1"
 
+react-spinners@^0.13.8:
+  version "0.13.8"
+  resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.13.8.tgz#5262571be0f745d86bbd49a1e6b49f9f9cb19acc"
+  integrity sha512-3e+k56lUkPj0vb5NDXPVFAOkPC//XyhKPJjvcGjyMNPWsBKpplfeyialP74G7H7+It7KzhtET+MvGqbKgAqpZA==
+
 react-tinder-card@^1.6.4:
   version "1.6.4"
   resolved "https://registry.yarnpkg.com/react-tinder-card/-/react-tinder-card-1.6.4.tgz#af24e8325f5e5e1e45dc85ac70f01aa8bafe248e"
