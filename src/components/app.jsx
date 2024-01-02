@@ -4,6 +4,7 @@ import { App, ZMPRouter, AnimationRoutes, SnackbarProvider } from "zmp-ui"
 import { RecoilRoot } from "recoil"
 import { DataProvider } from "../utils/dataContext"
 import HomePage from "../pages"
+import TestComponent from "../pages/testComponent"
 
 const MyApp = () => {
   return (
@@ -13,10 +14,8 @@ const MyApp = () => {
           <SnackbarProvider>
             <ZMPRouter>
               <AnimationRoutes>
-                <Route path="/" element={<HomePage></HomePage>}></Route>
-                {/* <Route path="/about" element={<About></About>}></Route>
-                <Route path="/form" element={<Form></Form>}></Route>
-                <Route path="/user" element={<User></User>}></Route> */}
+                <Route path="/" element={<HomePage />}></Route>
+                {/* <Route path="/" element={<TestComponent />}></Route> */}
               </AnimationRoutes>
             </ZMPRouter>
           </SnackbarProvider>

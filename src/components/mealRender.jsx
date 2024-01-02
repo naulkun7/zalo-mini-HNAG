@@ -1,9 +1,9 @@
-import React from "react";
+import React from "react"
 
 const MealRender = ({ meal, fadeIn }) => {
-  if (!meal) return null;
+  if (!meal) return null
 
-  const mealClass = fadeIn ? "row fade-in" : "row";
+  const mealClass = fadeIn ? "row fade-in" : "row"
   return (
     <div className={mealClass}>
       <div className="columns five">
@@ -49,7 +49,7 @@ const MealRender = ({ meal, fadeIn }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MealRender;
+export default MealRender

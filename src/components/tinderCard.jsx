@@ -1,5 +1,6 @@
-import React from "react";
-import TinderCard from "react-tinder-card";
+import React from "react"
+import TinderCard from "react-tinder-card"
+import PropType from "prop-types"
 
 export default function MyTinderCard({ children, onSwipe, onCardLeftScreen }) {
   return (
@@ -10,5 +11,11 @@ export default function MyTinderCard({ children, onSwipe, onCardLeftScreen }) {
     >
       {children}
     </TinderCard>
-  );
+  )
+}
+
+MyTinderCard.propTypes = {
+  children: PropType.node.isRequired,
+  onSwipe: PropType.func.isRequired,
+  onCardLeftScreen: PropType.func.isRequired,
 }
