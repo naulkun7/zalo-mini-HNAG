@@ -29,11 +29,11 @@ const RandomMealButton = ({ combinedData, setMeal, currentMealId }) => {
 RandomMealButton.propTypes = {
   combinedData: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.string,
     })
   ),
   setMeal: PropTypes.func.isRequired,
-  currentMealId: PropTypes.number,
+  currentMealId: PropTypes.string,
 }
 
 export default RandomMealButton

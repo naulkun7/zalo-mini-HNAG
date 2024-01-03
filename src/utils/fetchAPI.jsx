@@ -10,21 +10,43 @@ const fetchWithTimeout = (url, timeout = 20000) => {
 }
 
 export const fetchFirstAPI = () => {
-  return fetchWithTimeout(`${HAND}`).then((res) => res.json())
+  return fetchWithTimeout(`${HAND}`)
+    .then((res) => res.json())
+    .catch((error) => {
+      console.error("Error fetching from API 1:", error)
+      throw error
+    })
 }
 
 export const fetchSecondAPI = () => {
-  return fetchWithTimeout(`${MAP}`).then((res) => res.json())
+  return fetchWithTimeout(`${MAP}`)
+    .then((res) => res.json())
+    .catch((error) => {
+      console.error("Error fetching from API 2:", error)
+      throw error
+    })
 }
 
 // Fetch data from APIs and save to localStorage
 export const fetchAndSaveData = () => {
-  return Promise.all([fetchFirstAPI(), fetchSecondAPI()]).then(
-    ([firstAPIData, secondAPIData]) => {
-      const combinedData = [...firstAPIData, ...secondAPIData]
+  return Promise.all([fetchFirstAPI(), fetchSecondAPI()])
+    .then(([firstAPIData, secondAPIData]) => {
+      // Prefix IDs with source identifier
+      const prefixedFirstAPIData = firstAPIData.map((item) => ({
+        ...item,
+        id: `HAND-${item.id}`,
+      }))
+      const prefixedSecondAPIData = secondAPIData.map((item) => ({
+        ...item,
+        id: `MAP-${item.id}`,
+      }))
+
+      const combinedData = [...prefixedFirstAPIData, ...prefixedSecondAPIData]
       localStorage.setItem("mealsData", JSON.stringify(combinedData))
       console.log("combinedData", combinedData)
       return combinedData
-    }
-  )
+    })
+    .catch((error) => {
+      console.error("Error in fetching and saving data:", error)
+    })
 }
