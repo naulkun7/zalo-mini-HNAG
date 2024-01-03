@@ -32,6 +32,7 @@
     "react-tinder-card": "^1.6.4",
     "react-transition-group": "^4.4.5",
     "recoil": "^0.7.7",
+    "zmp-cli": "^2.1.0",
     "zmp-sdk": "^2.33.1",
     "zmp-ui": "^1.8.5"
   },
