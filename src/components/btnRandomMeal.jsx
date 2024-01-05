@@ -33,9 +33,7 @@ const RandomMealButton = ({ combinedData, setMeal, currentMealId }) => {
       </button>
       <button
         className="bg-pink-300 hover:bg-pink-400 rounded-lg shadow-lg p-5 w-1/3 h-25 font-bold text-sm"
-        onClick={() => 
-          navigate("/login")
-        }>
+        onClick={() => navigate("/login")}>
         LOGIN
       </button>
     </div>
