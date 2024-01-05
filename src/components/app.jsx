@@ -1,10 +1,10 @@
-import React from "react"
-import { Route } from "react-router-dom"
-import { App, ZMPRouter, AnimationRoutes, SnackbarProvider } from "zmp-ui"
-import { RecoilRoot } from "recoil"
-import { DataProvider } from "../utils/dataContext"
-import HomePage from "../pages"
-import TestComponent from "../pages/testComponent"
+import React from "react";
+import { Route } from "react-router-dom";
+import { App, ZMPRouter, AnimationRoutes, SnackbarProvider } from "zmp-ui";
+import { RecoilRoot } from "recoil";
+import { DataProvider } from "../utils/dataContext";
+import HomePage from "../pages";
+import TestComponent from "../pages/testComponent";
 
 const MyApp = () => {
   return (
@@ -22,6 +22,6 @@ const MyApp = () => {
         </App>
       </DataProvider>
     </RecoilRoot>
-  )
-}
-export default MyApp
+  );
+};
+export default MyApp;

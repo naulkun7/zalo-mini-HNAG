@@ -11,15 +11,34 @@ export const handleSwipe = (
   direction,
   currentMealIndex,
   combinedData,
-  setCurrentMealIndex
+  setCurrentMealIndex,
+  seenMeals,
+  setSeenMeals
 ) => {
   if (direction === "left" || direction === "right") {
-    // Nếu người dùng đã "swipe" qua món cuối cùng, bắt đầu lại từ đầu
-    if (currentMealIndex === combinedData.length - 1) {
-      setCurrentMealIndex(0);
-    } else {
-      // Ngược lại, chuyển đến món tiếp theo
-      setCurrentMealIndex(currentMealIndex + 1);
+    let remainingMeals = combinedData.filter(
+      (meal) => !seenMeals.includes(meal.id)
+    );
+
+    if (remainingMeals.length === 0) {
+      // Làm mới danh sách các món ăn đã xem và tiếp tục
+      setSeenMeals([]);
+      remainingMeals = combinedData;
     }
+
+    let newMealIndex;
+    do {
+      newMealIndex = Math.floor(Math.random() * remainingMeals.length);
+    } while (
+      remainingMeals[newMealIndex].id === combinedData[currentMealIndex].id
+    );
+
+    const newMeal = remainingMeals[newMealIndex];
+
+    // Cập nhật trạng thái
+    setCurrentMealIndex(
+      combinedData.findIndex((meal) => meal.id === newMeal.id)
+    );
+    setSeenMeals([...seenMeals, newMeal.id]);
   }
 };

@@ -1,7 +1,7 @@
-import React from "react"
-import { PulseLoader } from "react-spinners"
+import React from "react";
+import { PulseLoader } from "react-spinners";
 
-import Logo from "../assets/logo.png"
+import Logo from "../assets/logo.png";
 
 export default function LoadingScreen() {
   return (
@@ -17,5 +17,5 @@ export default function LoadingScreen() {
         size={10}
       />
     </div>
-  )
+  );
 }
