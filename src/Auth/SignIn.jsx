@@ -9,19 +9,14 @@ export default function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const addDataUser = () => {
-    const userInfoData = {
-      username,
-      password,
-    };
+  const userInfoData = {
+    username,
+    password,
+  };
 
+  const addDataUser = () => {
     const dataUser = fetch(login, {
       method: "GET",
-      // mode: "no-cors",
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
-      // body: JSON.stringify(userInfoData),
     })
       .then((res) => {
         console.log("Data submitted successfully", res);
@@ -57,8 +52,15 @@ export default function SignIn() {
             className="bg-pink-300 hover:bg-pink-400 rounded-lg shadow-lg p-5 w-1/3 h-25 font-bold text-sm"
             id="loginButton"
             onClick={() => {
-              // addDataUser();
               // Nếu đăng nhập thành công sẽ trả về HomePage và được quyền update món ăn
+              if (userInfoData.username && userInfoData.password) {
+                navigate("/");
+                addDataUser();
+              } else if (!userInfoData.username) {
+                alert("Tài khoản khoản không được bỏ trống!!");
+              } else if (!userInfoData.password) {
+                alert("Mật khẩu không được bỏ trống");
+              }
             }}>
             Đăng nhập
           </button>
