@@ -17,15 +17,10 @@ export default function SignIn() {
 
     const dataUser = fetch(login, {
       method: "GET",
-      // mode: "no-cors",
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
-      // body: JSON.stringify(userInfoData),
     })
       .then((res) => {
         console.log("Data submitted successfully", res);
-        alert("Data submitted successfully");
+        // alert("Data submitted successfully");
       })
       .catch((error) => {
         console.error("Error:", error);
