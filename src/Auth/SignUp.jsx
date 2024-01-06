@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { useNavigate } from "zmp-ui";
-import { signUp } from "./Auth";
+import React, { useState } from "react"
+import { useNavigate } from "zmp-ui"
+import { signUp } from "./auth"
 
 export default function SignUp() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
 
   const userInfoData = {
     username,
     password,
     name,
     email,
-  };
+  }
 
   return (
     <div className="h-screen bg-gray-700 pt-16 pl-4 pr-4">
@@ -56,12 +56,13 @@ export default function SignUp() {
             className="bg-pink-300 hover:bg-pink-400 rounded-lg shadow-lg p-5 w-1/3 h-25 font-bold text-sm"
             id="loginButton"
             onClick={() => {
-              signUp(userInfoData, navigate);
-            }}>
+              signUp(userInfoData, navigate)
+            }}
+          >
             Đăng Kí
           </button>
         </div>
       </div>
     </div>
-  );
+  )
 }
