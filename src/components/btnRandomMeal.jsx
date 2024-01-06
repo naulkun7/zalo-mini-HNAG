@@ -17,12 +17,15 @@ const RandomMealButton = ({ combinedData, setMeal, currentMealId }) => {
   };
 
   return (
-    <button
+    <div>
+      <button
       className="bg-pink-300 hover:bg-pink-400 rounded-lg shadow-lg p-5 max-w-xs w-full font-bold text-xl"
       onClick={getRandomMeal}
     >
       RANDOM MEAL
     </button>
+    </div>
+    
   );
 };
 

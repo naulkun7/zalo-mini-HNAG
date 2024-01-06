@@ -5,6 +5,8 @@ import { RecoilRoot } from "recoil";
 import { DataProvider } from "../utils/dataContext";
 import HomePage from "../pages";
 import TestComponent from "../pages/testComponent";
+import SignIn from "../auth/signIn";
+import SignUp from "../auth/SignUp";
 
 const MyApp = () => {
   return (
@@ -16,6 +18,8 @@ const MyApp = () => {
               <AnimationRoutes>
                 <Route path="/" element={<HomePage />}></Route>
                 {/* <Route path="/" element={<TestComponent />}></Route> */}
+                <Route path="/signin" element={<SignIn />} />
+                <Route path="/signup" element={<SignUp />} />
               </AnimationRoutes>
             </ZMPRouter>
           </SnackbarProvider>

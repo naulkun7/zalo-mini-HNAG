@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Page } from "zmp-ui";
 import "../css/index.css";
+import { useNavigate } from "zmp-ui";
 
 // Import utils
 import { useData } from "../utils/dataContext";
@@ -12,12 +13,14 @@ import LoadingScreen from "../components/loadingScreen";
 //import RandomMealButton from "../components/btnRandomMeal";
 import MyTinderCard from "../components/MyTinderCard";
 import { handleSwipe } from "../components/handleSwipe";
+
 const HomePage = () => {
   const [meal, setMeal] = useState(null);
   const [fadeIn, setFadeIn] = useState(true);
   const { combinedData, isLoading } = useData();
   const [currentMealIndex, setCurrentMealIndex] = useState(0);
   const [seenMeals, setSeenMeals] = useState([]);
+  const navigate = useNavigate();
 
   const onSwipe = (direction) => {
     handleSwipe(
@@ -67,6 +70,15 @@ const HomePage = () => {
               onSwipe={onSwipe}
             />
           )}
+        </div>
+        <div id="buttonContainer">
+          <button
+            className="bg-pink-300 hover:bg-pink-400 rounded-lg shadow-lg p-5 max-w-xs w-full font-bold text-xl"
+            onClick={() => {
+              navigate("/signin");
+            }}>
+            Sign In
+          </button>
         </div>
       </div>
     </Page>
