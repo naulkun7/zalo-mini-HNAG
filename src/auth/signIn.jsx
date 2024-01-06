@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useNavigate, Page } from "zmp-ui";
 import { signIn } from "./auth";
 
-
 export default function SignIn() {
   const navigate = useNavigate();
 
@@ -29,61 +28,70 @@ export default function SignIn() {
 
   return (
     <Page>
-      <div className="h-screen bg-gray-700 pt-16 pl-4 pr-4">
-        <div className="flex flex-col justify-center items-center mb-4">
-          <div className="text-xl font-bold pb-1 text-white">
+      <div className="w-full">
+        <div className="flex flex-col justify-center items-center mb-4 mt-5">
+          <div className="text-xl font-bold pb-1">
             Chào mừng bạn quay trở lại!
           </div>
-          <p className="text-gray-400 font-semibold">
-            Chúng tôi rất vui khi được thấy bạn!
-          </p>
+          <p className="font-semibold">Chúng tôi rất vui khi được thấy bạn!</p>
         </div>
-        <div className="form-group flex flex-col">
-          <p className="text-gray-400 font-bold pb-2">Thông tin tài khoản</p>
-          <input
-            type="text"
-            className="form-control mb-5 bg-zinc-900 p-3 rounded-lg"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Tên đăng nhập"
-            style={{ color: "white" }}
-          />
-          <input
-            type="password"
-            className="form-control mb-2 bg-zinc-900 p-3 rounded-lg"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Mật khẩu"
-            style={{ color: "white" }}
-          />
-
-          <div className="flex flex-col">
-            {/* Đăng ký */}
+        <form className="px-8 pt-6 pb-8 mb-4">
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="username">
+              Tài khoản
+            </label>
+            <input
+              className="shadow appearance-none border focus:border-red-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username"
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Tài khoản"
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="password">
+              Mật khẩu
+            </label>
+            <input
+              className="shadow appearance-none border focus:border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Mật khẩu"
+            />
+          </div>
+          <div className="flex items-center justify-between">
             <button
-              className="font-bold text-sm w-1/3 text-left mb-5 text-gray-900"
-              id="signUpButton"
-              onClick={() => navigate("/register")}>
-              Đăng ký
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="button"
+              onClick={() => {
+                signIn(
+                  userInfoData,
+                  navigate,
+                  encryptPassword,
+                  decryptPassword
+                );
+              }}>
+              Đăng nhập
             </button>
-
-            {/* Đăng nhập */}
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col">
+              <button className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
+                Quên mật khẩu?
+              </button>
               <button
-                className="bg-pink-300 hover:bg-pink-400 rounded-lg shadow-lg p-5 w-1/3 h-25 font-bold text-sm"
-                id="loginButton"
-                onClick={() => {
-                  signIn(
-                    userInfoData,
-                    navigate,
-                    encryptPassword,
-                    decryptPassword
-                  );
-                }}>
-                Đăng nhập
+                className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                onClick={() => navigate("/register")}>
+                Đăng ký
               </button>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </Page>
   );

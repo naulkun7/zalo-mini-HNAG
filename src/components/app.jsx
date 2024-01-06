@@ -18,8 +18,8 @@ const MyApp = () => {
               <AnimationRoutes>
                 <Route path="/" element={<HomePage />}></Route>
                 {/* <Route path="/" element={<TestComponent />}></Route> */}
-                <Route path="/signin" element={<SignIn />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/signin" element={<SignIn />}></Route>
+                <Route path="/register" element={<Register />}></Route>
               </AnimationRoutes>
             </ZMPRouter>
           </SnackbarProvider>
