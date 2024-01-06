@@ -11,7 +11,7 @@ import { useData } from "../utils/dataContext";
 //import MealRenderV2 from "../components/mealRenderV2";
 import LoadingScreen from "../components/loadingScreen";
 //import RandomMealButton from "../components/btnRandomMeal";
-import MyTinderCard from "../components/MyTinderCard";
+import MyTinderCard from "../components/myTinderCard";
 import { handleSwipe } from "../components/handleSwipe";
 
 const HomePage = () => {

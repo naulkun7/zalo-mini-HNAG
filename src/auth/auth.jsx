@@ -1,4 +1,5 @@
-const login = import.meta.env.VITE_LOGIN_API_URL;
+const login =
+  "https://script.google.com/macros/s/AKfycbxowndRf6ULZb7nV94aatKDrtIC-1Hh-PknBsqBVlcUSpNZjxGi62po7h5QXGuPxx3Fhg/exec";
 
 // Function đăng nhập => navigate => HomePage
 export const signIn = (

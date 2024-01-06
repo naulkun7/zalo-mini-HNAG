@@ -29,7 +29,7 @@ export default function SignIn() {
 
   return (
     <Page>
-      <div className="h-screen bg-gray-700 pt-16 pl-4 pr-4">
+      <div className="h-screen  pt-16 pl-4 pr-4">
         <div className="flex flex-col justify-center items-center mb-4">
           <div className="text-xl font-bold pb-1 text-white">
             Chào mừng bạn quay trở lại!
@@ -46,7 +46,6 @@ export default function SignIn() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Tên đăng nhập"
-            style={{ color: "white" }}
           />
           <input
             type="password"
@@ -54,7 +53,6 @@ export default function SignIn() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Mật khẩu"
-            style={{ color: "white" }}
           />
 
           <div className="flex flex-col">
