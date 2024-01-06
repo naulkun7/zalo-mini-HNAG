@@ -28,7 +28,7 @@ export default function SignIn() {
   };
 
   return (
-    <Page className="page">
+    <Page>
       <div className="h-screen bg-gray-700 pt-16 pl-4 pr-4">
         <div className="flex flex-col justify-center items-center mb-4">
           <div className="text-xl font-bold pb-1 text-white">
@@ -62,7 +62,7 @@ export default function SignIn() {
             <button
               className="font-bold text-sm w-1/3 text-left mb-5 text-gray-900"
               id="signUpButton"
-              onClick={() => navigate("/signup")}>
+              onClick={() => navigate("/register")}>
               Đăng ký
             </button>
 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "zmp-ui";
 import { signUp } from "./auth";
 
-export default function SignUp() {
+export default function Register() {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");

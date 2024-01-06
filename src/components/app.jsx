@@ -6,7 +6,7 @@ import { DataProvider } from "../utils/dataContext";
 import HomePage from "../pages";
 import TestComponent from "../pages/testComponent";
 import SignIn from "../auth/signIn";
-import SignUp from "../auth/SignUp";
+import Register from "../auth/register";
 
 const MyApp = () => {
   return (
@@ -19,7 +19,7 @@ const MyApp = () => {
                 <Route path="/" element={<HomePage />}></Route>
                 {/* <Route path="/" element={<TestComponent />}></Route> */}
                 <Route path="/signin" element={<SignIn />} />
-                <Route path="/signup" element={<SignUp />} />
+                <Route path="/register" element={<Register />} />
               </AnimationRoutes>
             </ZMPRouter>
           </SnackbarProvider>
