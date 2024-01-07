@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Page } from "zmp-ui";
-// import { register } from "./auth";
+import { register } from "./auth";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -46,29 +46,6 @@ export default function Register() {
     password,
     name,
     email,
-  };
-
-  const register = () => {
-    fetch(
-      "https://script.google.com/macros/s/AKfycbxowndRf6ULZb7nV94aatKDrtIC-1Hh-PknBsqBVlcUSpNZjxGi62po7h5QXGuPxx3Fhg/exec",
-      {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userInfoData),
-      }
-    )
-      .then((res) => {
-        console.log("Data submitted successfully", res);
-        alert("Đăng ký thành công");
-        navigate("/signin");
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("Đăng ký thất bại");
-      });
   };
 
   return (
@@ -150,7 +127,7 @@ export default function Register() {
               className="bg-pink-300 hover:bg-pink-400 rounded-lg shadow-lg p-5 w-1/3 h-25 font-bold text-sm"
               id="buttonContainer"
               onClick={() => {
-                register();
+                register(userInfoData, navigate);
               }}>
               Đăng Kí
             </button>

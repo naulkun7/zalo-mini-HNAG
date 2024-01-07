@@ -17,9 +17,9 @@ const MyApp = () => {
             <ZMPRouter>
               <AnimationRoutes>
                 <Route path="/" element={<HomePage />}></Route>
-                {/* <Route path="/" element={<TestComponent />}></Route> */}
                 <Route path="/signin" element={<SignIn />}></Route>
                 <Route path="/register" element={<Register />}></Route>
+                {/* <Route path="/" element={<TestComponent />}></Route> */}
               </AnimationRoutes>
             </ZMPRouter>
           </SnackbarProvider>
