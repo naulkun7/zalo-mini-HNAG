@@ -11,7 +11,7 @@ const MyTinderCard = ({ meal, onSwipe }) => {
         className="swipe"
         key={meal.id}
         onSwipe={onSwipe}
-        preventSwipe={["up", "down"]}
+        // preventSwipe={["up", "down"]}
       >
         <MealRenderV2 meal={meal} />
       </TinderCard>

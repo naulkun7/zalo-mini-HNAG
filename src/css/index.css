@@ -16,6 +16,20 @@
   font-family: Helvetica, Arial, sans-serif;
   text-align: center;
 }
+.button-bottom {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+.button-top {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
 
 .indexButton button {
   padding: 14px 21px;

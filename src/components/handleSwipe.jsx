@@ -15,7 +15,12 @@ export const handleSwipe = (
   seenMeals,
   setSeenMeals
 ) => {
-  if (direction === "left" || direction === "right") {
+  if (
+    direction === "left" ||
+    direction === "right" ||
+    direction === "up" ||
+    direction === "down"
+  ) {
     let remainingMeals = combinedData.filter(
       (meal) => !seenMeals.includes(meal.id)
     );
