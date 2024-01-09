@@ -42,27 +42,28 @@ export const signIn = (
     });
 };
 
-export const register = (userInfoData, navigate) => {
-  fetch(
-    "https://script.google.com/macros/s/AKfycbxowndRf6ULZb7nV94aatKDrtIC-1Hh-PknBsqBVlcUSpNZjxGi62po7h5QXGuPxx3Fhg/exec",
-    {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userInfoData),
-    }
-  )
+import { useNavigate } from "zmp-ui";
+
+export const register = (userInfoData) => {
+  const navigate = useNavigate();
+  const login =
+    "https://script.google.com/macros/s/AKfycbxowndRf6ULZb7nV94aatKDrtIC-1Hh-PknBsqBVlcUSpNZjxGi62po7h5QXGuPxx3Fhg/exec";
+    
+  fetch(login, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userInfoData),
+  })
     .then((res) => {
       console.log("Data submitted successfully", res);
-      alert("Đăng ký thành công");
-      navigate("/signin");
+      alert("Data submitted successfully");
     })
     .catch((error) => {
       console.error("Error:", error);
-      alert("Đăng ký thất bại");
-      // navigate("/register");
+      alert("Error submitting data");
     });
 };
 
