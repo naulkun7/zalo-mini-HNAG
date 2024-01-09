@@ -22,11 +22,11 @@ export const signIn = (
         return;
       }
 
-      const foundUser = data.find(
-        (item) =>
-          userInfoData.username === item.username &&
-          decryptPassword(userInfoData.password) === item.password // Decrypt before comparing
-      );
+      const foundUser = data.find((item) => {
+        if (userInfoData.password === item.password) {
+          return true;
+        }
+      });
 
       if (foundUser) {
         alert("Đăng nhập thành công");
@@ -39,16 +39,18 @@ export const signIn = (
     })
     .catch((error) => {
       alert("Error fetching data");
+      console.log(error);
     });
 };
 
-import { useNavigate } from "zmp-ui";
-
-export const register = (userInfoData) => {
-  const navigate = useNavigate();
-  const login =
-    "https://script.google.com/macros/s/AKfycbxowndRf6ULZb7nV94aatKDrtIC-1Hh-PknBsqBVlcUSpNZjxGi62po7h5QXGuPxx3Fhg/exec";
-    
+export const register = (
+  userInfoData,
+  navigate,
+  login,
+  decryptUsername,
+  decryptPassword,
+  decryptEmail
+) => {
   fetch(login, {
     method: "POST",
     mode: "no-cors",
@@ -58,40 +60,28 @@ export const register = (userInfoData) => {
     body: JSON.stringify(userInfoData),
   })
     .then((res) => {
-      console.log("Data submitted successfully", res);
-      alert("Data submitted successfully");
+      if (!userInfoData.username) {
+        alert("Vui lòng nhập tên tài khoản");
+        return;
+      }
+      if (!userInfoData.password) {
+        alert("Vui lòng nhập mật khẩu");
+        return;
+      }
+      if (!userInfoData.name) {
+        alert("Vui lòng nhập họ và tên");
+        return;
+      }
+      if (!userInfoData.email) {
+        alert("Vui lòng nhập email");
+        return;
+      }
+
+      alert("Đăng ký thành công");
+      navigate("/signin");
     })
     .catch((error) => {
       console.error("Error:", error);
       alert("Error submitting data");
     });
 };
-
-// export const register = (userInfoData, navigate) => {
-//   fetch(
-//     "https://script.google.com/macros/s/AKfycbxowndRf6ULZb7nV94aatKDrtIC-1Hh-PknBsqBVlcUSpNZjxGi62po7h5QXGuPxx3Fhg/exec",
-//     {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(userInfoData),
-//     }
-//   )
-//     .then((res) => {
-//       if (!res.ok) {
-//         throw new Error(`Network response was not ok: ${res.status}`);
-//       }
-//       return res.json(); // or res.text() if expecting plain text
-//     })
-//     .then((data) => {
-//       console.log("Data submitted successfully", data);
-//       alert("Đăng ký thành công");
-//       navigate("/signin");
-//     })
-//     .catch((error) => {
-//       console.error("Error:", error);
-//       alert("Đăng ký thất bại");
-//       // navigate("/register");
-//     });
-// };

@@ -80,12 +80,6 @@ export default function SignIn() {
               }}>
               Đăng nhập
             </button>
-            {/* <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-              onClick={() => navigate("/register")}>
-              Đăng ký
-            </button> */}
             <div className="flex flex-col">
               <button className="align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
                 Quên mật khẩu?
