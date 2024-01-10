@@ -23,7 +23,8 @@ const RandomMealButton = ({ combinedData, setMeal, currentMealId }) => {
         className="bg-pink-300 hover:bg-pink-400 rounded-lg shadow-lg p-5 max-w-xs w-full font-bold text-xl"
         onClick={getRandomMeal}
       >
-        <img src={Logo} alt="logo" className="w-16" />
+        {/* <img src={Logo} alt="logo" className="w-16" /> */}
+        RANDOM MEAL
       </button>
     </div>
   );
